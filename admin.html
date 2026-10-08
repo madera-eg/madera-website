@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>MÁDERA | إدارة المنتجات</title>
+  <title>MÁDERA | لوحة إدارة المنتجات</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -15,13 +15,15 @@
     <div class="brand">MÁDERA</div>
     <div class="brand-sub">ADMIN PANEL</div>
     <nav>
-      <button class="nav-btn active">📦 المنتجات</button>
+      <button class="nav-btn active" onclick="showProducts()">📦 كل المنتجات</button>
       <button class="nav-btn" onclick="scrollToForm()">➕ إضافة منتج</button>
-      <button class="nav-btn" onclick="clearAllProducts()">🗑️ مسح كل المنتجات</button>
+      <button class="nav-btn" onclick="exportProducts()">⬇️ تصدير البيانات</button>
+      <label class="nav-btn import-btn">⬆️ استيراد البيانات<input id="importFile" type="file" accept=".json,application/json"></label>
+      <button class="nav-btn danger-nav" onclick="clearAllProducts()">🗑️ مسح كل المنتجات</button>
     </nav>
     <div class="side-note">
-      <b>ملاحظة</b>
-      <p>البيانات محفوظة على هذا المتصفح في نسخة التجربة الحالية.</p>
+      <b>صلاحيات الإدارة المضافة</b>
+      <p>تعديل المنتجات الحالية، الأسعار، الصور، الأقسام، الوصف، المقاسات، حالة الظهور، والمنتجات المميزة + نسخ المنتج وتصدير/استيراد البيانات.</p>
     </div>
   </aside>
 
@@ -29,22 +31,24 @@
     <header class="topbar">
       <div>
         <h1>إدارة المنتجات</h1>
-        <p>أضف وعدّل منتجات MÁDERA بسهولة</p>
+        <p>تحكم كامل في المنتجات الموجودة بالفعل أو أضف منتجات جديدة.</p>
       </div>
       <a class="store-btn" href="index.html">← فتح المتجر</a>
     </header>
 
     <section class="stats">
       <div class="stat"><span>إجمالي المنتجات</span><strong id="totalCount">0</strong></div>
+      <div class="stat"><span>المنتجات الظاهرة</span><strong id="visibleCount">0</strong></div>
+      <div class="stat"><span>المنتجات المميزة</span><strong id="featuredCount">0</strong></div>
       <div class="stat"><span>الأقسام</span><strong id="categoryCount">0</strong></div>
-      <div class="stat"><span>آخر تحديث</span><strong id="lastUpdate">—</strong></div>
+      <div class="stat stat-wide"><span>آخر تحديث</span><strong id="lastUpdate">—</strong></div>
     </section>
 
     <section class="panel" id="productFormSection">
       <div class="panel-title">
         <div>
           <h2 id="formTitle">إضافة منتج جديد</h2>
-          <p>املأ البيانات واختر صورة المنتج من جهازك</p>
+          <p>يمكنك الآن تعديل أي منتج موجود، بما في ذلك السعر والصورة.</p>
         </div>
         <button class="ghost-btn hidden" id="cancelEdit" onclick="resetForm()">إلغاء التعديل</button>
       </div>
@@ -59,8 +63,13 @@
           </div>
 
           <div class="field">
-            <label>السعر بالجنيه *</label>
-            <input id="price" type="number" min="0" required placeholder="12500">
+            <label>السعر الحالي بالجنيه *</label>
+            <input id="price" type="number" min="0" step="0.01" required placeholder="12500">
+          </div>
+
+          <div class="field">
+            <label>السعر قبل الخصم (اختياري)</label>
+            <input id="oldPrice" type="number" min="0" step="0.01" placeholder="15000">
           </div>
 
           <div class="field">
@@ -81,43 +90,59 @@
             <input id="size" placeholder="مثال: 260 × 180 سم">
           </div>
 
+          <div class="field checks">
+            <label class="check"><input id="active" type="checkbox" checked> المنتج ظاهر في المتجر</label>
+            <label class="check"><input id="featured" type="checkbox"> منتج مميز</label>
+          </div>
+
           <div class="field full">
             <label>وصف المنتج</label>
             <textarea id="description" rows="4" placeholder="اكتب وصفًا مختصرًا للمنتج..."></textarea>
           </div>
 
           <div class="field full">
-            <label>صورة المنتج *</label>
+            <label>صورة المنتج</label>
             <label class="upload" for="image">
-              <span id="uploadText">📷 اضغط لاختيار صورة من اللابتوب</span>
+              <span id="uploadText">📷 اختيار صورة جديدة من اللابتوب</span>
               <input id="image" type="file" accept="image/*">
             </label>
             <div id="previewWrap" class="preview-wrap hidden">
               <img id="preview" alt="معاينة">
               <button type="button" class="remove-img" onclick="removeImage()">×</button>
             </div>
-            <small>يفضل JPG أو PNG. في هذه النسخة يتم حفظ الصورة داخل المتصفح للتجربة.</small>
+            <small>عند تعديل منتج، لو لم تختر صورة جديدة ستظل الصورة القديمة كما هي.</small>
           </div>
         </div>
 
-        <button class="primary-btn" type="submit" id="saveBtn">حفظ المنتج</button>
+        <div class="form-actions">
+          <button class="primary-btn" type="submit" id="saveBtn">حفظ المنتج</button>
+          <button class="secondary-btn hidden" type="button" id="duplicateBtn" onclick="duplicateCurrent()">نسخ المنتج</button>
+        </div>
       </form>
     </section>
 
-    <section class="panel">
+    <section class="panel" id="productsSection">
       <div class="products-head">
         <div>
-          <h2>المنتجات</h2>
-          <p>كل المنتجات التي أضفتها للمتجر</p>
+          <h2>المنتجات الموجودة بالفعل</h2>
+          <p>عدّل أو اخفِ أو احذف أي منتج من هنا.</p>
         </div>
-        <input class="search" id="search" placeholder="🔎 ابحث عن منتج...">
+        <div class="tools">
+          <input class="search" id="search" placeholder="🔎 ابحث بالاسم أو القسم...">
+          <select id="statusFilter" class="filter">
+            <option value="all">كل الحالات</option>
+            <option value="active">الظاهرة فقط</option>
+            <option value="hidden">المخفية فقط</option>
+            <option value="featured">المميزة فقط</option>
+          </select>
+        </div>
       </div>
 
       <div id="products" class="products"></div>
       <div id="empty" class="empty hidden">
         <div>📦</div>
-        <h3>لا توجد منتجات بعد</h3>
-        <p>ابدأ بإضافة أول منتج من النموذج بالأعلى.</p>
+        <h3>لا توجد منتجات مطابقة</h3>
+        <p>غيّر البحث أو أضف منتجًا جديدًا.</p>
       </div>
     </section>
   </main>

@@ -138,3 +138,5 @@ footer p,footer a{display:block;color:#6f6354;font-size:11px;line-height:2}
  .footer-grid{grid-template-columns:1fr}.footer-grid>div{padding-bottom:8px}
  .cart{width:370px}
 }
+
+.old-price{display:block;color:#999;font-size:12px;margin-top:2px}.product-bottom{align-items:center}

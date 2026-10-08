@@ -8,16 +8,16 @@ const categories = [
 ];
 
 const DEFAULT_PRODUCTS = [
-  {id:"1",name:"جزيرة مطبخ خشب",category:"مطابخ",size:"180 × 90 سم",price:16750,image:"https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=800&q=90"},
-  {id:"2",name:"شباك ألومنيوم",category:"مونتال",size:"150 × 120 سم",price:5200,image:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=90"},
-  {id:"3",name:"مكتب عملي مع رفوف",category:"مكاتب",size:"120 × 60 سم",price:8800,image:"https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=800&q=90"},
-  {id:"4",name:"مطبخ خشب + مونتال",category:"مطابخ",size:"2.56 × 2.56 م",price:66000,image:"https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=90"},
+  {id:"1",name:"جزيرة مطبخ خشب",category:"مطابخ",size:"180 × 90 سم",price:12500,image:"https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=800&q=90"},
+  {id:"2",name:"شباك ألومنيوم",category:"مونتال",size:"150 × 120 سم",price:4200,image:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=90"},
+  {id:"3",name:"مكتب عملي مع رفوف",category:"مكاتب",size:"120 × 60 سم",price:7500,image:"https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=800&q=90"},
+  {id:"4",name:"مطبخ خشب + مونتال",category:"مطابخ",size:"2.56 × 2.56 م",price:32000,image:"https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=90"},
   {id:"5",name:"وحدة حمام مودرن",category:"حمامات",size:"80 × 50 سم",price:5800,image:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=90"},
-  {id:"6",name:"وحدة تلفزيون خشب",category:"مطابخ",size:"180 × 45 سم",price:9700,image:"https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=90"},
-  {id:"7",name:"باب ألومنيوم مودرن",category:"مونتال",size:"90 × 210 سم",price:7800,image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=90"},
-  {id:"8",name:"وحدة حوض حمام",category:"حمامات",size:"100 × 50 سم",price:7200,image:"https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=90"},
-  {id:"9",name:"مكتب منزلي خشب",category:"مكاتب",size:"140 × 70 سم",price:8700,image:"https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=800&q=90"},
-  {id:"10",name:"مطبخ خشب طبيعي",category:"مطابخ",size:"حسب المقاس",price:113000,image:"https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=800&q=90"}
+  {id:"6",name:"وحدة تلفزيون خشب",category:"مطابخ",size:"180 × 45 سم",price:8900,image:"https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=90"},
+  {id:"7",name:"باب ألومنيوم مودرن",category:"مونتال",size:"90 × 210 سم",price:6800,image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=90"},
+  {id:"8",name:"وحدة حوض حمام",category:"حمامات",size:"100 × 50 سم",price:6400,image:"https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=90"},
+  {id:"9",name:"مكتب منزلي خشب",category:"مكاتب",size:"140 × 70 سم",price:8200,image:"https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=800&q=90"},
+  {id:"10",name:"مطبخ خشب طبيعي",category:"مطابخ",size:"حسب المقاس",price:28500,image:"https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=800&q=90"}
 ];
 
 const PRODUCTS_KEY = "madera_products_v1";
@@ -56,7 +56,8 @@ function renderCategories(){
 }
 
 function renderProducts(list = products){
-  productsGrid.innerHTML = list.map(p => `
+  const visible = list.filter(p => p.active !== false);
+  productsGrid.innerHTML = visible.map(p => `
     <article class="product">
       <div class="product-image">
         <img src="${p.img || p.image || ""}" alt="${p.name}" loading="lazy">
@@ -66,7 +67,10 @@ function renderProducts(list = products){
         <h3>${p.name}</h3>
         <div class="product-meta">${p.size}</div>
         <div class="product-bottom">
-          <strong class="price">${money(p.price)}</strong>
+          <div>
+            <strong class="price">${money(p.price)}</strong>
+            ${p.oldPrice ? `<del class="old-price">${money(p.oldPrice)}</del>` : ""}
+          </div>
           <button class="add-cart" data-add="${p.id}" aria-label="أضف للسلة">♧</button>
         </div>
       </div>

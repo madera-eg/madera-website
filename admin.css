@@ -57,3 +57,23 @@ small{color:var(--muted)}
 .toast.show{opacity:1;transform:none}
 @media(max-width:950px){.sidebar{width:200px}.main{margin-right:200px;padding:20px}.products{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.sidebar{position:static;width:auto;padding:20px}.brand-sub{margin-bottom:15px}.side-note{display:none}.main{margin-right:0;padding:14px}.topbar{gap:12px;align-items:flex-start}.topbar{flex-direction:column}.stats{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.products{grid-template-columns:1fr}.products-head{align-items:stretch;flex-direction:column;gap:12px}.search{max-width:none}}
+
+.import-btn{display:block;position:relative}.import-btn input{display:none}
+.danger-nav{color:#ffd6d1!important}
+.stat{min-height:88px}.stat-wide{grid-column:span 2}
+.checks{justify-content:center;background:#fffaf2;border:1px solid var(--line);border-radius:11px;padding:12px}
+.check{display:flex;align-items:center;gap:9px;font-weight:600;cursor:pointer}
+.check input{width:auto}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap}
+.secondary-btn{margin-top:20px;background:#fff;border:1px solid var(--line);color:var(--brown);border-radius:12px;padding:13px 24px;cursor:pointer;font-weight:700}
+.tools{display:flex;gap:10px;align-items:center}.filter{max-width:180px}
+.card{position:relative}.card.is-hidden{opacity:.72}
+.card-img{position:relative;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.status{position:absolute;top:10px;right:10px;background:var(--green);color:#fff;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:700}
+.status.off{background:var(--danger)}
+.card-actions{display:grid!important;grid-template-columns:1fr 1fr}
+.card-actions button{min-height:40px}
+.card-actions button:first-child{grid-column:1/-1}
+.price del{font-size:11px;color:#999;font-weight:500;margin-right:6px}
+@media(max-width:950px){.stat-wide{grid-column:auto}.tools{width:100%;flex-wrap:wrap}.filter{max-width:none;flex:1}}
+@media(max-width:700px){.stat-wide{grid-column:auto}.tools{flex-direction:column}.tools>*{max-width:none;width:100%}.card-actions{grid-template-columns:1fr 1fr}}

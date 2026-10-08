@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MÁDERA في دمياط — مطابخ خشب ومونتال، وحدات حمام، مكاتب، أبواب وشبابيك وإكسسوارات وديكور بتصميم عصري وتنفيذ حسب المقاس.">
+  <meta name="keywords" content="MADERA, MÁDERA, مطابخ دمياط, مطابخ خشب, مطابخ مونتال, ألومنيوم دمياط, أبواب وشبابيك, مكاتب, وحدات حمام, أثاث حسب الطلب">
+  <meta name="author" content="MÁDERA">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://YOUR-DOMAIN.example/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_EG">
+  <meta property="og:site_name" content="MÁDERA">
+  <meta property="og:title" content="MÁDERA | مطابخ وأثاث وتصميم حسب الطلب">
+  <meta property="og:description" content="تصاميم عصرية بجودة تدوم — مطابخ، مونتال، حمامات، مكاتب، أبواب وشبابيك وإكسسوارات وديكور.">
+  <meta property="og:url" content="https://YOUR-DOMAIN.example/">
+  <meta property="og:image" content="https://YOUR-DOMAIN.example/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MÁDERA | Crafted for your space">
+  <meta name="twitter:description" content="مطابخ وأثاث ووحدات حسب الطلب في دمياط.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.example/og-image.jpg">
+  <title>MÁDERA | مطابخ وأثاث وتصميم حسب الطلب في دمياط</title>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"MÁDERA",
+    "description":"تصميم وتنفيذ المطابخ والوحدات والمكاتب والأبواب والشبابيك حسب الطلب.",
+    "url":"https://YOUR-DOMAIN.example/",
+    "logo":"https://YOUR-DOMAIN.example/logo.png",
+    "areaServed":"Damietta, Egypt"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="announcement">شحن وتركيب داخل دمياط — استشارة مجانية قبل الطلب</div>
+
+  <header class="header">
+    <div class="header-main">
+      <div class="header-actions">
+        <button class="head-icon" aria-label="الحساب">♙</button>
+        <button class="head-icon" aria-label="المفضلة">♡</button>
+        <button class="head-icon cart-button" id="openCart" aria-label="السلة">
+          ♧ <span id="cartCount">0</span>
+        </button>
+      </div>
+
+      <a class="brand" href="#">
+        <span class="brand-decoration">⌁</span>
+        <span class="brand-name">MÁDERA</span>
+        <span class="brand-tag">CRAFTED FOR YOUR SPACE</span>
+      </a>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="ابحث عن منتج...">
+        <span>⌕</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="active" href="#home">الرئيسية</a>
+      <a href="#categories">المطابخ ووحدات الخشب</a>
+      <a href="#categories">وحدات المونتال</a>
+      <a href="#categories">وحدات الحمام</a>
+      <a href="#categories">المكاتب</a>
+      <a href="#categories">أبواب وشبابيك</a>
+      <a href="#categories">إكسسوارات وديكور</a>
+    </nav>
+  </header>
+
+  <main id="home">
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-big-logo">MÁDERA</div>
+        <div class="hero-tag">CRAFTED FOR YOUR SPACE</div>
+        <h1>تصاميم عصرية .. بجودة تدوم</h1>
+        <p>مطابخ · وحدات مونتال · حمامات · مكاتب وأكثر</p>
+        <a href="#products" class="primary-btn">تسوق الآن <span>←</span></a>
+      </div>
+      <div class="slider-dots"><i class="active"></i><i></i><i></i></div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="categories" id="categoryGrid"></div>
+    </section>
+
+    <section class="section products-section" id="products">
+      <div class="section-heading">
+        <div>
+          <h2>منتجات مميزة <span>♧</span></h2>
+          <p>أكثر المنتجات طلبًا من عملائنا</p>
+        </div>
+        <button class="show-all" id="showAll">عرض الكل ←</button>
+      </div>
+
+      <div class="products" id="productsGrid"></div>
+
+      <div class="promos">
+        <a class="promo promo-wood" href="#products">
+          <div><b>خشب طبيعي</b><span>بجودة عالية ←</span></div>
+        </a>
+        <a class="promo promo-kitchen" href="#products">
+          <div><b>تصاميم تناسب</b><span>كل المساحات ←</span></div>
+        </a>
+        <a class="promo promo-detail" href="#products">
+          <div><b>تفاصيل صغيرة</b><span>تصنع فرقًا كبيرًا ←</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="about-image"></div>
+      <div class="about-content">
+        <div class="mini-brand">MÁDERA</div>
+        <h2>من نحن؟</h2>
+        <p>
+          في MÁDERA نؤمن أن كل مساحة تستحق قطعة أثاث تعبر عنها.
+          نصمم وننفذ المطابخ والوحدات والمكاتب والأبواب والشبابيك
+          بلمسات عصرية تجمع بين الجمال والعملية.
+        </p>
+        <a href="#" class="primary-btn">اعرف المزيد ←</a>
+
+        <div class="features">
+          <span>✓ جودة مضمونة</span>
+          <span>✓ تصميم حسب الطلب</span>
+          <span>✓ تركيب احترافي</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="mini-brand">MÁDERA</div>
+        <p>CRAFTED FOR YOUR SPACE</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="TikTok">♪</a>
+          <a href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>اشترك في نشرتنا البريدية</h3>
+        <p>احصل على أحدث العروض والتصاميم</p>
+        <form class="newsletter" id="newsletter">
+          <input type="email" required placeholder="أدخل بريدك الإلكتروني">
+          <button>اشترك</button>
+        </form>
+      </div>
+
+      <div>
+        <h3>روابط سريعة</h3>
+        <a href="#home">الرئيسية</a>
+        <a href="#">من نحن</a>
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">الشروط والأحكام</a>
+        <a href="#">تواصل معنا</a>
+      </div>
+
+      <div>
+        <h3>طرق الدفع</h3>
+        <div class="payments">
+          <span>VISA</span>
+          <span>MC</span>
+          <span>PayPal</span>
+        </div>
+        <p>دفع آمن ومحمي</p>
+      </div>
+    </div>
+    <div class="copyright">© 2026 MÁDERA. All rights reserved. — أثاثك .. بأسلوبك</div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="cart" id="cart">
+    <div class="cart-header">
+      <h2>سلة المشتريات</h2>
+      <button id="closeCart">×</button>
+    </div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>الإجمالي</span>
+        <strong id="cartTotal">0 EGP</strong>
+      </div>
+      <button class="checkout" id="checkout">إتمام الطلب</button>
+      <small>سيتم ربط الدفع الإلكتروني في المرحلة التالية.</small>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <noscript>
+    <section aria-label="MÁDERA">
+      <h2>MÁDERA — مطابخ وأثاث حسب الطلب في دمياط</h2>
+      <p>مطابخ خشب ومونتال، وحدات حمام، مكاتب، أبواب وشبابيك، وإكسسوارات وديكور بتصميم عصري وتنفيذ حسب المقاس.</p>
+    </section>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>

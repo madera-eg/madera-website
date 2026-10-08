@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>MÁDERA | إدارة المنتجات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">MÁDERA</div>
+    <div class="brand-sub">ADMIN PANEL</div>
+    <nav>
+      <button class="nav-btn active">📦 المنتجات</button>
+      <button class="nav-btn" onclick="scrollToForm()">➕ إضافة منتج</button>
+      <button class="nav-btn" onclick="clearAllProducts()">🗑️ مسح كل المنتجات</button>
+    </nav>
+    <div class="side-note">
+      <b>ملاحظة</b>
+      <p>البيانات محفوظة على هذا المتصفح في نسخة التجربة الحالية.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1>إدارة المنتجات</h1>
+        <p>أضف وعدّل منتجات MÁDERA بسهولة</p>
+      </div>
+      <a class="store-btn" href="index.html">← فتح المتجر</a>
+    </header>
+
+    <section class="stats">
+      <div class="stat"><span>إجمالي المنتجات</span><strong id="totalCount">0</strong></div>
+      <div class="stat"><span>الأقسام</span><strong id="categoryCount">0</strong></div>
+      <div class="stat"><span>آخر تحديث</span><strong id="lastUpdate">—</strong></div>
+    </section>
+
+    <section class="panel" id="productFormSection">
+      <div class="panel-title">
+        <div>
+          <h2 id="formTitle">إضافة منتج جديد</h2>
+          <p>املأ البيانات واختر صورة المنتج من جهازك</p>
+        </div>
+        <button class="ghost-btn hidden" id="cancelEdit" onclick="resetForm()">إلغاء التعديل</button>
+      </div>
+
+      <form id="productForm">
+        <input type="hidden" id="editId">
+
+        <div class="form-grid">
+          <div class="field">
+            <label>اسم المنتج *</label>
+            <input id="name" required placeholder="مثال: مطبخ خشب مودرن">
+          </div>
+
+          <div class="field">
+            <label>السعر بالجنيه *</label>
+            <input id="price" type="number" min="0" required placeholder="12500">
+          </div>
+
+          <div class="field">
+            <label>القسم *</label>
+            <select id="category" required>
+              <option value="">اختر القسم</option>
+              <option>مطابخ</option>
+              <option>مونتال</option>
+              <option>حمامات</option>
+              <option>مكاتب</option>
+              <option>أبواب وشبابيك</option>
+              <option>إكسسوارات وديكور</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>المقاس</label>
+            <input id="size" placeholder="مثال: 260 × 180 سم">
+          </div>
+
+          <div class="field full">
+            <label>وصف المنتج</label>
+            <textarea id="description" rows="4" placeholder="اكتب وصفًا مختصرًا للمنتج..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label>صورة المنتج *</label>
+            <label class="upload" for="image">
+              <span id="uploadText">📷 اضغط لاختيار صورة من اللابتوب</span>
+              <input id="image" type="file" accept="image/*">
+            </label>
+            <div id="previewWrap" class="preview-wrap hidden">
+              <img id="preview" alt="معاينة">
+              <button type="button" class="remove-img" onclick="removeImage()">×</button>
+            </div>
+            <small>يفضل JPG أو PNG. في هذه النسخة يتم حفظ الصورة داخل المتصفح للتجربة.</small>
+          </div>
+        </div>
+
+        <button class="primary-btn" type="submit" id="saveBtn">حفظ المنتج</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="products-head">
+        <div>
+          <h2>المنتجات</h2>
+          <p>كل المنتجات التي أضفتها للمتجر</p>
+        </div>
+        <input class="search" id="search" placeholder="🔎 ابحث عن منتج...">
+      </div>
+
+      <div id="products" class="products"></div>
+      <div id="empty" class="empty hidden">
+        <div>📦</div>
+        <h3>لا توجد منتجات بعد</h3>
+        <p>ابدأ بإضافة أول منتج من النموذج بالأعلى.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="admin.js"></script>
+</body>
+</html>
